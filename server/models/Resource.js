@@ -1,23 +1,28 @@
 const mongoose = require('mongoose');
 
-const ResourceSchema = new mongoose.Schema({
+const resourceSchema = new mongoose.Schema({
     resourceName: {
         type: String,
-        required: true
+        required: [true, 'Please provide a resource name']
     },
-    details: {
+    description: {
         type: String,
+        required: [true, 'Please provide a description']
+    },
+    requestedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     },
     status: {
         type: String,
-        enum: ['Pending', 'Approved', 'Rejected'],
-        default: 'Pending'
+        enum: ['pending', 'approved', 'rejected'],
+        default: 'pending'
     },
-    date: {
-        type: Date,
-        default: Date.now
+    approvedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     }
-});
+}, { timestamps: true });
 
-module.exports = mongoose.model('Resource', ResourceSchema);
+module.exports = mongoose.model('Resource', resourceSchema);

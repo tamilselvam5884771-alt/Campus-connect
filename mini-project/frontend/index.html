@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Connect - Enhanced</title>
+    <!-- Premium Google Fonts: Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Decor (Blobs for modern aesthetic) -->
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+
+    <nav class="navbar glass">
+        <div class="nav-brand">
+            <span class="icon">✨</span> CampusConnect
+        </div>
+        <div class="nav-links">
+            <button class="nav-btn active" onclick="switchTab('reports')">Reports</button>
+            <button class="nav-btn" onclick="switchTab('resources')">Resources</button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Reports Section -->
+        <section id="reports-section" class="tab-content active fade-enter">
+            <div class="header-action">
+                <div>
+                    <h2 class="gradient-text">Campus Reports</h2>
+                    <p class="subtitle">View and submit issues around the campus.</p>
+                </div>
+                <button class="btn btn-primary pulse-hover" onclick="openModal('report-modal')">
+                    <span class="btn-icon">＋</span> Add Report
+                </button>
+            </div>
+            <div id="reports-grid" class="cards-grid">
+                <!-- Reports dynamically injected -->
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources-section" class="tab-content hidden fade-enter">
+            <div class="header-action">
+                <div>
+                    <h2 class="gradient-text">Campus Resources</h2>
+                    <p class="subtitle">Discover helpful tools and study materials.</p>
+                </div>
+                <button class="btn btn-primary pulse-hover" onclick="openModal('resource-modal')">
+                    <span class="btn-icon">＋</span> Add Resource
+                </button>
+            </div>
+            <div id="resources-grid" class="cards-grid">
+                <!-- Resources dynamically injected -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modals Overlay -->
+    <div id="modal-overlay" class="modal-overlay hidden" onclick="closeAllModals(event)">
+        <!-- Report Modal -->
+        <div id="report-modal" class="modal glass">
+            <div class="modal-header">
+                <h3>Submit a New Report</h3>
+                <button class="icon-btn" onclick="closeModal('report-modal')">✕</button>
+            </div>
+            <form id="report-form" onsubmit="submitReport(event)">
+                <div class="form-group slide-up" style="--delay: 0.1s">
+                    <label for="report-title">Title</label>
+                    <input type="text" id="report-title" required placeholder="E.g., Broken projector in Room 101">
+                </div>
+                <div class="form-group slide-up" style="--delay: 0.2s">
+                    <label for="report-desc">Description</label>
+                    <textarea id="report-desc" required rows="3" placeholder="Provide details..."></textarea>
+                </div>
+                <div class="form-group slide-up" style="--delay: 0.3s">
+                    <label for="report-loc">Location</label>
+                    <input type="text" id="report-loc" required placeholder="E.g., Main Building">
+                </div>
+                <div class="form-group slide-up" style="--delay: 0.4s">
+                    <label for="report-image">Image</label>
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="report-image" accept="image/*" required class="file-input">
+                        <div class="file-upload-ui">Choose an image...</div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-submit slide-up" style="--delay: 0.5s">Submit Report</button>
+            </form>
+        </div>
+
+        <!-- Resource Modal -->
+        <div id="resource-modal" class="modal glass hidden">
+            <div class="modal-header">
+                <h3>Add a New Resource</h3>
+                <button class="icon-btn" onclick="closeModal('resource-modal')">✕</button>
+            </div>
+            <form id="resource-form" onsubmit="submitResource(event)">
+                <div class="form-group slide-up" style="--delay: 0.1s">
+                    <label for="res-title">Resource Title</label>
+                    <input type="text" id="res-title" required placeholder="E.g., New AI Books">
+                </div>
+                <div class="form-group slide-up" style="--delay: 0.2s">
+                    <label for="res-desc">Description</label>
+                    <textarea id="res-desc" required rows="3" placeholder="Provide details..."></textarea>
+                </div>
+                <div class="form-group slide-up" style="--delay: 0.3s">
+                    <label for="res-dept">Department</label>
+                    <input type="text" id="res-dept" required placeholder="E.g., Computer Science">
+                </div>
+                <div class="form-group slide-up" style="--delay: 0.4s">
+                    <label for="res-image">Image</label>
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="res-image" accept="image/*" required class="file-input">
+                        <div class="file-upload-ui">Choose an image...</div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-submit slide-up" style="--delay: 0.5s">Add Resource</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
